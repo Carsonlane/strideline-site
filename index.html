@@ -25,13 +25,21 @@
     header {
       padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
     }
-    header .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-shadow: 0 0 8px var(--neon-green);
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+    .logo-img {
+      height: 100px;
+      width: auto;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 8px var(--neon-green));
     }
     nav a {
       margin-left: 1.5rem;
@@ -92,18 +100,23 @@
 </head>
 <body>
   <header>
-    <div class="logo">STRIDELINE</div>
+    <a href="/" class="logo">
+      <img src="logo.png" alt="STRIDELINE Logo" class="logo-img">
+      <span>STRIDELINE</span>
+    </a>
     <nav>
       <a href="#features">Features</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
+
   <section class="hero">
     <h1>CHASE THE PACE</h1>
     <p>Next-level track pacing lights designed to guide every stride with precision and neon brilliance.</p>
     <a href="#contact" class="btn">Get Started</a>
   </section>
+
   <footer>
     &copy; 2025 STRIDELINE. All rights reserved.
   </footer>
