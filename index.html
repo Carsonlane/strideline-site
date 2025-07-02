@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STRIDELINE</title>
+  <style>
+    :root {
+      --bg-color: #000;
+      --text-color: #fff;
+      --neon-green: #39FF14;
+      --neon-blue: #1B03A3;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      line-height: 1.6;
+    }
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 0 0 8px var(--neon-green);
+    }
+    nav a {
+      margin-left: 1.5rem;
+      color: var(--text-color);
+      text-decoration: none;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: var(--neon-blue);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      letter-spacing: 4px;
+      text-shadow: 0 0 10px var(--neon-green);
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid var(--neon-blue);
+      color: var(--text-color);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 0 8px var(--neon-blue);
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: var(--neon-blue);
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.875rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">STRIDELINE</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <h1>CHASE THE PACE</h1>
+    <p>Next-level track pacing lights designed to guide every stride with precision and neon brilliance.</p>
+    <a href="#contact" class="btn">Get Started</a>
+  </section>
+  <footer>
+    &copy; 2025 STRIDELINE. All rights reserved.
+  </footer>
+</body>
+</html>
