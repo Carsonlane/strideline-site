@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strideline – Home</title>
+  <style>
+    /* Base */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #eee;
+      font-family: Arial, sans-serif;
+    }
+    a { text-decoration: none; }
+
+    /* Header / Nav */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+    header img {
+      height: 200px;
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: bold;
+      color: #39FF14;
+      transition: color .2s;
+    }
+    nav a:hover {
+      color: #00FFFF;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 120px 20px;
+    }
+    .hero h1 {
+      font-size: 3.5em;
+      margin: 0 0 10px;
+      text-shadow:
+        0 0 10px #00FFFF,
+        0 0 20px #39FF14;
+    }
+    .hero p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 5px #39FF14;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1em;
+      color: #000;
+      background: linear-gradient(45deg, #39FF14, #00FFFF);
+      border-radius: 15px;
+      box-shadow:
+        0 0 10px #39FF14,
+        0 0 20px #00FFFF;
+      transition: transform .2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Features */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+    .feature {
+      flex: 1 1 260px;
+      max-width: 300px;
+      margin: 15px;
+      padding: 15px;
+      border: 1px solid #111;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(57,255,20,0.5);
+      text-align: center;
+    }
+    .feature h3 {
+      margin-bottom: 10px;
+      color: #39FF14;
+    }
+    .feature p {
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.85em;
+      color: #555;
+      border-top: 1px solid #111;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.png" alt="Strideline Logo">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Precision Track Pacing</h1>
+    <p>Illuminate your race line with cutting-edge pacing lights designed for champions.</p>
+    <a href="contact.html" class="btn">Get in Touch</a>
+  </section>
+<div style="text-align: center;">
+    <img src="Iowa_photo.jpeg" alt="Iowa Landscape" style="max-width: 100%; height: auto;">
+</div>
+  <section class="features">
+    <div class="feature">
+      <h3>Custom Patterns</h3>
+      <p>Tailor pacing sequences to any workout or race strategy.</p>
+    </div>
+    <div class="feature">
+      <h3>Race-Start Sync</h3>
+      <p>Seamless integration with official start signals.</p>
+    </div>
+    <div class="feature">
+      <h3>All-Weather Build</h3>
+      <p>Rugged IP67-rated housings for any condition.</p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Strideline. All rights reserved.
+  </footer>
+
+</body>
+</html>
