@@ -28,7 +28,4 @@ This repository currently hosts the **StrideLine website**, which introduces the
 - `README.md` – Project documentation  
 
 ## How to View Website  
-1. Clone the repository:  
-   ```bash
-   git clone https://github.com/YOUR-USERNAME/stride-line.git
-   cd stride-line
+1. go to https://stride-line.com/
