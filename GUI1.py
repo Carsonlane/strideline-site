@@ -166,12 +166,10 @@ class PaceEvent:
         return max(1, math.ceil(self.distance_m / self.laps_m))
 
     def precompute_trail(self) -> list[tuple[int,int,int]]:
+        # No fading: each LED in the head+trail is fully on (same color)
+        # for the duration of the configured trail length.
         r, g, b = self.color
-        levels = []
-        for t in range(self.trail_len, -1, -1):
-            factor = max(0.1, 1.0 - (t / max(1, self.trail_len)))
-            levels.append((int(r * factor), int(g * factor), int(b * factor)))
-        return levels
+        return [(r, g, b)] * (self.trail_len + 1)
 
 
 # ==========================
@@ -243,11 +241,14 @@ class Runner(threading.Thread):
             fb = [(0,0,0)] * rail_leds
             # wrap and draw
             head_idx = int(pos_f % rail_leds)
-            for t, col in enumerate(trail_levels):
-                idx = head_idx - (ev.trail_len - t)
-                if idx < 0:
-                    continue
-                fb[idx] = col
+            # Do not light LED 0 at any time; only show once we have advanced beyond it
+            if head_idx != 0:
+                for t, col in enumerate(trail_levels):
+                    idx = head_idx - (ev.trail_len - t)
+                    # Skip any pixel at or below 0 to keep LED 0 dark and avoid negative indices
+                    if idx <= 0:
+                        continue
+                    fb[idx] = col
             # push
             for i, (r,g,b) in enumerate(fb):
                 self.strip.setPixelColor(i, pack_color(r, g, b, order=COLOR_ORDER))
@@ -310,11 +311,14 @@ class Runner(threading.Thread):
             # Clear framebuffer and draw head+trail
             fb = [(0,0,0)] * rail_leds
             head_idx = int(pos_f)
-            for t, col in enumerate(trail_levels):
-                idx = head_idx - (ev.trail_len - t)
-                if idx < 0:
-                    continue
-                fb[idx] = col
+            # Keep LED 0 dark; only draw once the head has progressed past the start/finish pixel
+            if head_idx != 0:
+                for t, col in enumerate(trail_levels):
+                    idx = head_idx - (ev.trail_len - t)
+                    # Do not illuminate LED 0 or any negative index
+                    if idx <= 0:
+                        continue
+                    fb[idx] = col
             for i, (r,g,b) in enumerate(fb):
                 self.strip.setPixelColor(i, pack_color(r, g, b, order=COLOR_ORDER))
             try:
@@ -438,13 +442,15 @@ class Runner(threading.Thread):
                         continue
 
                 head_idx = int(st["pos_f"])
-                # Draw head + trail onto framebuffer with simple linear fade
-                levels = st["trail_levels"]
-                for t, col in enumerate(levels):
-                    idx = head_idx - (ev.trail_len - t)
-                    if idx < 0:
-                        continue
-                    fb[idx] = blend_additive(fb[idx], col)
+                # Do not light LED 0; only draw once head has moved past index 0
+                if head_idx != 0:
+                    levels = st["trail_levels"]
+                    for t, col in enumerate(levels):
+                        idx = head_idx - (ev.trail_len - t)
+                        # Keep LED 0 dark and ignore negative indices
+                        if idx <= 0:
+                            continue
+                        fb[idx] = blend_additive(fb[idx], col)
 
             # Push framebuffer to hardware
             for i, (r, g, b) in enumerate(fb):
