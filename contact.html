@@ -3,127 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="favicon.png">
   <title>Strideline – Contact</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: #eee;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-    }
-    header img {
-      height: 50px;
-    }
-    nav a {
-      margin-left: 20px;
-      font-weight: bold;
-      color: #39FF14;
-      transition: color .2s;
-    }
-    nav a:hover {
-      color: #00FFFF;
+    :root {
+      --bg: #05060a;
+      --panel: #0d1017;
+      --text: #e7edf3;
+      --muted: #8da0b6;
+      --accent: #5df2d6;
+      --accent-2: #5bb0ff;
+      --border: rgba(255, 255, 255, 0.08);
+      --glow: 0 15px 60px rgba(93, 242, 214, 0.35);
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color-scheme: dark;
     }
 
-    .contact {
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 20px;
-      background: #111;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,255,255,0.2);
-    }
-    .contact h2 {
-      margin-top: 0;
-      text-align: center;
-      color: #00FFFF;
-      text-shadow: 0 0 10px #00FFFF;
-    }
-    .contact label {
-      display: block;
-      margin-top: 15px;
-      font-size: 0.95em;
-      color: #39FF14;
-    }
-    .contact input,
-    .contact textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      background: #000;
-      border: 1px solid #39FF14;
-      border-radius: 5px;
-      color: #eee;
-      box-shadow: inset 0 0 5px rgba(57,255,20,0.5);
-      font-size: 1em;
-    }
-    .contact button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      font-size: 1em;
-      color: #000;
-      background: linear-gradient(45deg, #39FF14, #00FFFF);
-      border: none;
-      border-radius: 25px;
-      box-shadow:
-        0 0 10px #39FF14,
-        0 0 20px #00FFFF;
-      cursor: pointer;
-      transition: transform .2s;
-    }
-    .contact button:hover {
-      transform: scale(1.05);
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: radial-gradient(circle at 20% 20%, rgba(91, 176, 255, 0.18), transparent 28%), radial-gradient(circle at 80% 10%, rgba(93, 242, 214, 0.16), transparent 30%), var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+
+    .page-shell { max-width: 900px; margin: 0 auto; padding: 32px 20px 80px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: clamp(48px, 8vw, 90px); filter: drop-shadow(0 10px 25px rgba(91,176,255,0.35)); }
+    .brand .wordmark { font-weight: 700; letter-spacing: 0.04em; color: var(--text); text-transform: uppercase; }
+
+    nav { display: flex; align-items: center; gap: 16px; }
+    nav a { padding: 10px 14px; border-radius: 12px; color: var(--muted); font-weight: 600; transition: color 0.2s, background 0.2s; }
+    nav a:hover, nav a:focus-visible { color: var(--text); background: rgba(255,255,255,0.06); outline: none; }
+
+    .panel { background: linear-gradient(150deg, rgba(91,176,255,0.08), rgba(93,242,214,0.06)), var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: clamp(20px, 6vw, 36px); box-shadow: 0 12px 50px rgba(0,0,0,0.35); display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
+    h1 { font-size: clamp(2rem, 3.4vw, 2.6rem); letter-spacing: -0.02em; }
+    p { color: var(--muted); }
+
+    form { display: grid; gap: 14px; }
+    label { font-weight: 600; color: var(--text); font-size: 0.95rem; }
+    input, textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--text); font-size: 1rem; box-shadow: inset 0 6px 25px rgba(0,0,0,0.25); }
+    textarea { resize: vertical; min-height: 140px; }
+
+    .cta-btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 14px 16px; border-radius: 14px; background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #041018; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--glow); transition: transform 0.2s ease, box-shadow 0.2s ease; cursor: pointer; }
+    .cta-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 20px 70px rgba(91,176,255,0.35); }
+
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--muted); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; font-size: 0.85rem; }
+
+    footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: space-between; }
+      .cta-btn { width: 100%; }
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.85em;
-      color: #555;
-      border-top: 1px solid #111;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-      background: #000;
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
+  <div class="page-shell">
+    <header>
+      <div class="brand">
+        <img src="logo.png" alt="Strideline logo">
+        <div class="wordmark">Strideline</div>
+      </div>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="cta-btn" href="index.html">View product</a>
+    </header>
 
-  <header>
-    <img src="logo.png" alt="Strideline Logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    <section class="panel">
+      <div>
+        <div class="badge">Talk with our team</div>
+        <h1>Tell us about your track, meet, or training plan.</h1>
+        <p>We’ll help you choose the right Strideline pacing setup—whether you need a turnkey rental for race day or a full-time installation for your program.</p>
+      </div>
+      <form action="https://formspree.io/f/movlaldr" method="POST">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="details">How can we help?</label>
+          <textarea id="details" name="message" placeholder="Share your event date, facility type, or any specs you have in mind." required></textarea>
+        </div>
+        <button class="cta-btn" type="submit">Send message</button>
+      </form>
+    </section>
 
-  <div class="contact">
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/movlaldr" method="POST">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required></textarea>
-
-      <button type="submit">Send Message</button>
-    </form>
+    <footer>
+      &copy; 2025 Strideline. All rights reserved.
+    </footer>
   </div>
-
-  <footer>
-    &copy; 2025 Strideline. All rights reserved.
-  </footer>
-
 </body>
 </html>
