@@ -1,215 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Strideline – Home</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>Strideline – Precision Track Pacing</title>
   <style>
-    /* Base */
-    body {
+    :root {
+      --bg: #05060a;
+      --panel: #0d1017;
+      --text: #e7edf3;
+      --muted: #8da0b6;
+      --accent: #5df2d6;
+      --accent-2: #5bb0ff;
+      --border: rgba(255, 255, 255, 0.08);
+      --glow: 0 15px 60px rgba(93, 242, 214, 0.35);
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #eee;
-      font-family: Arial, sans-serif;
-    }
-    a { text-decoration: none; }
-    * { box-sizing: border-box; }
-    img, video { max-width: 100%; height: auto; display: block; }
-
-    /* Constrain page sections on wide screens */
-    :is(header, .hero, .video-demo, .features, footer) {
-      max-width: 1200px;
-      margin-inline: auto;
     }
 
-    /* Header / Nav */
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 40px;
-    }
-    header img {
-      height: clamp(56px, 10vw, 120px);
-    }
-    nav a {
-      margin-left: 20px;
-      font-weight: bold;
-      color: #39FF14;
-      transition: color .2s;
-    }
-    nav a:hover {
-      color: #00FFFF;
+    body {
+      background: radial-gradient(circle at 20% 20%, rgba(91, 176, 255, 0.18), transparent 28%),
+                  radial-gradient(circle at 80% 10%, rgba(93, 242, 214, 0.16), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
     }
 
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 120px 20px;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      margin: 0 0 10px;
-      text-shadow:
-        0 0 10px #00FFFF,
-        0 0 20px #39FF14;
-    }
-    .hero p {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      margin-bottom: 30px;
-      text-shadow: 0 0 5px #39FF14;
-    }
-    .btn {
-      display: inline-block;
-      padding: 15px 30px;
-      font-size: 1em;
-      color: #000;
-      background: linear-gradient(45deg, #39FF14, #00FFFF);
-      border-radius: 15px;
-      box-shadow:
-        0 0 10px #39FF14,
-        0 0 20px #00FFFF;
-      transition: transform .2s;
-      touch-action: manipulation;
-    }
-    .btn:hover {
-      transform: scale(1.05);
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; border-radius: 14px; }
+
+    .page-shell { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand img { height: clamp(48px, 8vw, 90px); filter: drop-shadow(0 10px 25px rgba(91,176,255,0.35)); }
+    .brand .wordmark { font-weight: 700; letter-spacing: 0.04em; color: var(--text); text-transform: uppercase; }
+
+    nav { display: flex; align-items: center; gap: 16px; }
+    nav a { padding: 10px 14px; border-radius: 12px; color: var(--muted); font-weight: 600; transition: color 0.2s, background 0.2s; }
+    nav a:hover, nav a:focus-visible { color: var(--text); background: rgba(255, 255, 255, 0.06); outline: none; }
+
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px; background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #041018; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .cta-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 20px 70px rgba(91,176,255,0.35); }
+
+    main { margin-top: 36px; display: flex; flex-direction: column; gap: 48px; }
+
+    .hero { display: grid; gap: 28px; align-items: center; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); background: linear-gradient(160deg, rgba(91, 176, 255, 0.08), rgba(93, 242, 214, 0.06)), var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: clamp(20px, 6vw, 36px); box-shadow: 0 10px 50px rgba(0,0,0,0.25); }
+    .hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .hero p { color: var(--muted); font-size: 1.05rem; margin-bottom: 20px; }
+    .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+    .hero .meta div { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+    .hero .meta strong { display: block; color: var(--text); font-size: 1rem; }
+    .hero .meta span { color: var(--muted); font-size: 0.9rem; }
+
+    .media-card { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 16px 50px rgba(0,0,0,0.35); background: #0c1118; }
+    .media-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(91,176,255,0.12), rgba(93,242,214,0.06)); pointer-events: none; }
+    .media-card img { width: 100%; height: 100%; object-fit: cover; }
+
+    .section-title { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .section-title span { display: inline-block; width: 30px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 14px 40px rgba(0,0,0,0.25); }
+    .card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+    .card p { color: var(--muted); font-size: 0.96rem; }
+
+    .video-section { background: linear-gradient(180deg, rgba(91,176,255,0.08), rgba(5,6,10,0.92)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 18px 60px rgba(0,0,0,0.35); }
+    .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
+
+    .cta-panel { background: linear-gradient(120deg, rgba(93,242,214,0.12), rgba(91,176,255,0.10)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; display: grid; gap: 12px; align-items: center; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); box-shadow: var(--glow); }
+    .cta-panel p { color: var(--muted); }
+
+    footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; text-align: center; }
+
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: space-between; }
+      .cta-btn { width: 100%; justify-content: center; }
     }
 
-    /* Features */
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 60px 20px;
-    }
-    .feature {
-      flex: 1 1 280px;
-      max-width: 360px;
-      margin: 0;
-      padding: 16px;
-      border: 1px solid #111;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(57,255,20,0.5);
-      text-align: left;
-    }
-    .feature h3 {
-      margin-bottom: 10px;
-      color: #39FF14;
-    }
-    .feature p {
-      font-size: 0.95em;
-      line-height: 1.4;
-    }
-
-    /* Mobile adjustments */
-    @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 16px 20px;
-      }
-      nav a {
-        margin: 0 12px 0 0;
-        display: inline-block;
-        padding: 10px 8px; /* larger tap targets */
-      }
-      .hero {
-        padding: 60px 16px;
-        text-align: left;
-      }
-      .features {
-        padding: 30px 16px;
-      }
-      .feature {
-        flex: 1 1 100%;
-        max-width: none;
-        margin: 10px 0;
-        text-align: left;
-      }
-    }
-
-    /* Large-screen breathing room */
-    @media (min-width: 1200px) {
-      .hero {
-        padding: 140px 20px;
-      }
-    }
-
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition: none !important;
-      }
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.85em;
-      color: #555;
-      border-top: 1px solid #111;
+      * { transition: none !important; animation-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
+  <div class="page-shell">
+    <header>
+      <div class="brand">
+        <img src="logo.png" alt="Strideline logo">
+        <div class="wordmark">Strideline</div>
+      </div>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <a class="cta-btn" href="contact.html">Book a Demo</a>
+    </header>
 
-  <header>
-    <img src="logo.png" alt="Strideline Logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+    <main>
+      <section class="hero">
+        <div class="copy">
+          <p class="section-title"><span></span> Track pacing reinvented</p>
+          <h1>Precision pacing lights for every lane, every rep.</h1>
+          <p>Strideline blends pro-grade hardware with intuitive controls so coaches and athletes can lock in the exact rhythm they need—on game day or in training.</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
+            <a class="cta-btn" href="contact.html">Get in touch</a>
+            <a class="cta-btn" style="background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none;" href="#features">See capabilities</a>
+          </div>
+          <div class="meta">
+            <div><strong>Race-start sync</strong><span>Lights fire the moment the gun goes off.</span></div>
+            <div><strong>Custom patterns</strong><span>Dial in pacing for any distance or interval.</span></div>
+            <div><strong>Rent or own</strong><span>Flexible access for meets, camps, or permanent installs.</span></div>
+          </div>
+        </div>
+        <div class="media-card">
+          <img src="Iowa_photo.jpeg" alt="Track with Strideline pacing lights">
+        </div>
+      </section>
 
-  <section class="hero">
-    <h1>Precision Track Pacing</h1>
-    <p>Illuminate your race line with cutting-edge pacing lights designed for champions.</p>
-    <a href="contact.html" class="btn">Get in Touch</a>
-  </section>
-<div style="text-align: center; padding: 0 20px;">
-    <img src="Iowa_photo.jpeg" alt="Iowa Landscape">
-</div>
-  <section class="video-demo" style="text-align: center; padding: 60px 20px;">
-    <h2 style="color: #00FFFF; text-shadow: 0 0 10px #00FFFF;">Watch It in Action</h2>
-    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 90%; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 15px rgba(0,255,255,0.4);">
-      <iframe
-        src="https://www.youtube.com/embed/98L6I7q6KCw?si=aZP84Am3J8qbTpdJ"
-        title="StrideLine Pacing Demo"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px;">
-      </iframe>
-    </div>
-  </section>
-  <section class="features">
-  <div class="feature">
-    <h3>Custom Patterns</h3>
-    <p>Craft dynamic pacing sequences that mirror your strategy—every rep, every race.</p>
+      <section id="features" aria-labelledby="features-title">
+        <p id="features-title" class="section-title"><span></span>Built for modern track programs</p>
+        <div class="grid">
+          <article class="card">
+            <h3>Customizable pacing sequences</h3>
+            <p>Program lap times and progressive splits in seconds, with presets for warmups, workouts, and races.</p>
+          </article>
+          <article class="card">
+            <h3>Gun-ready synchronization</h3>
+            <p>Automatic start with the starter’s signal keeps every athlete perfectly aligned with race cadence.</p>
+          </article>
+          <article class="card">
+            <h3>Durable, weather-ready hardware</h3>
+            <p>Low-profile rails and sealed lighting modules perform reliably through rain, heat, or cold.</p>
+          </article>
+          <article class="card">
+            <h3>Flexible access models</h3>
+            <p>Rent a kit for your next event or outfit your facility with a full-time installation.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="video-section" aria-labelledby="demo-title">
+        <p id="demo-title" class="section-title"><span></span>See the pacing line live</p>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/98L6I7q6KCw?si=aZP84Am3J8qbTpdJ" title="StrideLine pacing demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <section aria-labelledby="cta-title">
+        <div class="cta-panel">
+          <div>
+            <p class="section-title" id="cta-title"><span></span>Ready for the gun</p>
+            <p>Tell us about your meet, camp, or training plan and we’ll tailor a Strideline setup to match your goals.</p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;">
+            <a class="cta-btn" href="contact.html">Schedule a call</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      &copy; 2025 Strideline. All rights reserved.
+    </footer>
   </div>
-
-  <div class="feature">
-    <h3>Race-Start Sync</h3>
-    <p>Engineered to automatically start with the starter’s gun.</p>
-  </div>
-
-  <div class="feature">
-    <h3>Flexible Access</h3>
-    <p>Available to rent or own—bringing professional pacing technology to every track and event.</p>
-  </div>
-  </section>
-
-  <footer>
-    &copy; 2025 Strideline. All rights reserved.
-  </footer>
-
 </body>
 </html>
