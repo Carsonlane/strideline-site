@@ -75,6 +75,7 @@
     .video-section { background: linear-gradient(180deg, rgba(124,255,61,0.10), rgba(5,6,10,0.92)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 18px 60px rgba(0,0,0,0.35); }
     .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); }
     .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
+    .video-frame + .video-frame { margin-top: 18px; }
 
     .cta-panel { background: linear-gradient(120deg, rgba(124,255,61,0.12), rgba(49,209,90,0.10)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; display: grid; gap: 12px; align-items: center; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); box-shadow: var(--glow); }
     .cta-panel p { color: var(--muted); }
@@ -149,6 +150,9 @@
         <p id="demo-title" class="section-title"><span></span>See the Stride Line</p>
         <div class="video-frame">
           <iframe src="https://www.youtube.com/embed/98L6I7q6KCw?si=aZP84Am3J8qbTpdJ" title="StrideLine pacing demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/3MVsuJYANzs?si=RE5868Pp1Dg5vdiV" title="StrideLine pacing short" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </section>
 
