@@ -6,143 +6,85 @@
   <link rel="icon" type="image/png" href="favicon.png">
   <title>Strideline - Precision Track Pacing</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
     :root {
-      --bg: #03040a;
-      --panel: #0a0d16;
-      --text: #edf4f3;
-      --muted: #b4c3c1;
+      --bg: #05060a;
+      --panel: #0d1017;
+      --text: #e7edf3;
+      --muted: #a6b8a3;
       --accent: #7cff3d;
-      --accent-2: #25a6ff;
+      --accent-2: #31d15a;
       --border: rgba(255, 255, 255, 0.08);
-      --glow: 0 25px 100px rgba(124, 255, 61, 0.35);
-      --x: 50%;
-      --y: 50%;
+      --glow: 0 15px 60px rgba(124, 255, 61, 0.35);
       font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
       color-scheme: dark;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      min-height: 100vh;
-      color: var(--text);
-      background: radial-gradient(circle at 12% 15%, rgba(124,255,61,0.14), transparent 24%),
-                  radial-gradient(circle at 80% 6%, rgba(37,166,255,0.12), transparent 22%),
-                  linear-gradient(180deg, #03040a 0%, #050916 100%);
-      overflow-x: hidden;
-      position: relative;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.15), transparent),
-                        radial-gradient(1px 1px at 60% 70%, rgba(124,255,61,0.2), transparent),
-                        radial-gradient(1px 1px at 80% 20%, rgba(37,166,255,0.18), transparent);
-      opacity: 0.6;
-      pointer-events: none;
-      mix-blend-mode: screen;
+    body {
+      background: radial-gradient(circle at 20% 20%, rgba(124, 255, 61, 0.16), transparent 28%),
+                  radial-gradient(circle at 80% 10%, rgba(49, 209, 90, 0.14), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
     }
 
     a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; border-radius: 14px; }
 
-    .page-shell { max-width: 1100px; margin: 0 auto; padding: 28px 18px 100px; position: relative; z-index: 1; }
-
-    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 16px; background: rgba(10,13,22,0.75); backdrop-filter: blur(10px); box-shadow: 0 20px 80px rgba(0,0,0,0.35); }
+    .page-shell { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
     .brand { display: flex; align-items: center; gap: 12px; }
-    .brand img { height: clamp(44px, 7vw, 78px); filter: drop-shadow(0 8px 20px rgba(124,255,61,0.35)); }
-    .wordmark { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .brand img { height: clamp(48px, 8vw, 90px); filter: drop-shadow(0 10px 25px rgba(124,255,61,0.35)); }
+    .brand .wordmark { font-weight: 700; letter-spacing: 0.04em; color: var(--text); text-transform: uppercase; }
 
-    nav { display: flex; align-items: center; gap: 10px; }
-    nav a { padding: 10px 14px; border-radius: 12px; color: var(--muted); font-weight: 600; border: 1px solid transparent; transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease; }
-    nav a:hover, nav a:focus-visible { color: var(--text); border-color: var(--border); background: rgba(255,255,255,0.04); outline: none; }
+    nav { display: flex; align-items: center; gap: 16px; }
+    nav a { padding: 10px 14px; border-radius: 12px; color: var(--muted); font-weight: 600; transition: color 0.2s, background 0.2s; }
+    nav a:hover, nav a:focus-visible { color: var(--text); background: rgba(255, 255, 255, 0.06); outline: none; }
 
-    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px; background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #03100b; font-weight: 700; border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .cta-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 25px 90px rgba(124,255,61,0.38); }
+    .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 14px; background: linear-gradient(120deg, var(--accent), var(--accent-2)); color: #041018; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); box-shadow: var(--glow); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .cta-btn:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 20px 70px rgba(124,255,61,0.35); }
 
-    main { margin-top: 48px; display: grid; gap: 38px; }
+    main { margin-top: 36px; display: flex; flex-direction: column; gap: 48px; }
 
-    .hero { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: 22px; padding: clamp(32px, 8vw, 60px); background: linear-gradient(160deg, rgba(124, 255, 61, 0.08), rgba(37, 166, 255, 0.08)), var(--panel); box-shadow: 0 24px 120px rgba(0,0,0,0.45); isolation: isolate; }
+    .hero { display: grid; gap: 28px; align-items: center; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); background: linear-gradient(160deg, rgba(124, 255, 61, 0.10), rgba(49, 209, 90, 0.08)), var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: clamp(20px, 6vw, 36px); box-shadow: 0 10px 50px rgba(0,0,0,0.25); }
+    .hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .hero p { color: var(--muted); font-size: 1.05rem; margin-bottom: 20px; }
+    .hero .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; }
+    .hero .meta div { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+    .hero .meta strong { display: block; color: var(--text); font-size: 1rem; }
+    .hero .meta span { color: var(--muted); font-size: 0.9rem; }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: -20%;
-      background: radial-gradient(240px circle at var(--x) var(--y), rgba(124,255,61,0.22), transparent 65%),
-                  radial-gradient(300px circle at calc(var(--x) + 6%) calc(var(--y) + 4%), rgba(37,166,255,0.18), transparent 70%);
-      opacity: 0.8;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-      filter: blur(12px);
-    }
+    .media-card { position: relative; overflow: hidden; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 16px 50px rgba(0,0,0,0.35); background: #0c1118; }
+    .media-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(124,255,61,0.14), rgba(49,209,90,0.08)); pointer-events: none; }
+    .media-card img { width: 100%; height: 100%; object-fit: cover; }
 
-    .hero:hover::before { opacity: 1; }
+    .section-title { display: flex; align-items: center; gap: 10px; color: var(--text); font-size: 1.15rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .section-title span { display: inline-block; width: 30px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
 
-    .grid-overlay {
-      position: absolute;
-      inset: 12px;
-      border-radius: 18px;
-      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mix-blend-mode: screen;
-      opacity: 0.35;
-      pointer-events: none;
-    }
+    .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 14px 40px rgba(0,0,0,0.25); }
+    .card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+    .card p { color: var(--muted); font-size: 0.96rem; }
 
-    .hero-content { position: relative; z-index: 1; display: grid; gap: 26px; justify-items: center; text-align: center; }
+    .video-section { background: linear-gradient(180deg, rgba(124,255,61,0.10), rgba(5,6,10,0.92)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; box-shadow: 0 18px 60px rgba(0,0,0,0.35); }
+    .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--border); }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; border-radius: 12px; }
 
-    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--muted); font-weight: 600; }
-    .pill .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle, var(--accent) 0%, #0c0 100%); box-shadow: 0 0 18px rgba(124,255,61,0.5); }
-    .pill .dot.blue { background: radial-gradient(circle, var(--accent-2) 0%, #0af 100%); box-shadow: 0 0 18px rgba(37,166,255,0.5); }
+    .cta-panel { background: linear-gradient(120deg, rgba(124,255,61,0.12), rgba(49,209,90,0.10)); border: 1px solid var(--border); border-radius: 18px; padding: 24px; display: grid; gap: 12px; align-items: center; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); box-shadow: var(--glow); }
+    .cta-panel p { color: var(--muted); }
 
-    .title { font-size: clamp(2.4rem, 7vw, 3.8rem); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 800; text-shadow: 0 8px 40px rgba(0,0,0,0.45); }
-    .subtitle { max-width: 620px; color: var(--muted); font-size: 1.05rem; }
+    footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.9rem; text-align: center; }
 
-    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
-    .ghost { background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none; }
-
-    .pulse-ring { width: clamp(220px, 40vw, 320px); height: clamp(220px, 40vw, 320px); border-radius: 50%; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); background: radial-gradient(circle at center, rgba(124,255,61,0.12), rgba(3,4,10,0.7)); box-shadow: 0 20px 90px rgba(0,0,0,0.45); }
-    .pulse-ring::before, .pulse-ring::after {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      background: conic-gradient(from 120deg, rgba(124,255,61,0.3), rgba(37,166,255,0.4), transparent 55%, rgba(124,255,61,0.3));
-      animation: rotate 14s linear infinite;
-      opacity: 0.75;
-    }
-    .pulse-ring::after { animation-duration: 20s; mix-blend-mode: screen; }
-
-    .pulse-core {
-      position: absolute;
-      inset: 12%;
-      border-radius: 50%;
-      background: radial-gradient(220px circle at var(--x) var(--y), rgba(124,255,61,0.22), transparent 60%),
-                  radial-gradient(circle at center, rgba(37,166,255,0.2), rgba(3,4,10,0.8));
-      border: 1px solid rgba(255,255,255,0.12);
-      transition: background 0.2s ease;
-    }
-
-    .feature-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    .card { background: rgba(10,13,22,0.85); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 16px 60px rgba(0,0,0,0.35); }
-    .card h3 { margin-bottom: 8px; font-size: 1.06rem; }
-    .card p { color: var(--muted); font-size: 0.97rem; }
-
-    .mini-title { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
-    .mini-title span { display: inline-block; width: 26px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
-
-    footer { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.92rem; text-align: center; }
-
-    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
       header { flex-direction: column; align-items: flex-start; }
       nav { width: 100%; justify-content: space-between; }
       .cta-btn { width: 100%; justify-content: center; }
-      .pulse-ring { width: 100%; max-width: 320px; height: auto; aspect-ratio: 1; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -155,7 +97,7 @@
     <header>
       <div class="brand">
         <img src="logo.png" alt="Strideline logo">
-        <div class="wordmark">StrideLine</div>
+        
       </div>
       <nav aria-label="Primary">
         <a href="index.html">Home</a>
@@ -165,45 +107,60 @@
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="grid-overlay" aria-hidden="true"></div>
-        <div class="hero-content">
-          <div class="badge-row">
-            <span class="pill"><span class="dot"></span>Neon pacing</span>
-            <span class="pill"><span class="dot blue"></span>Race-ready</span>
-            <span class="pill">Built for meets</span>
+      <section class="hero">
+        <div class="copy"
+          <h1>Precision LED pacing lights</h1>
+          <p>Strideline helps runners hit exact splits in racing and training</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:6px;">
+            <a class="cta-btn" href="contact.html">Get in touch</a>
+            <a class="cta-btn" style="background: transparent; color: var(--text); border: 1px solid var(--border); box-shadow: none;" href="#features">See capabilities</a>
           </div>
-          <h1 id="hero-title" class="title">StrideLine</h1>
-          <p class="subtitle">Precision LED pacing lights that electrify the oval. Build race-day sequences, sync to the gun, and let athletes lock into neon-fast rhythm.</p>
-          <div class="cta-row">
-            <a class="cta-btn" href="contact.html">Launch a demo</a>
-            <a class="cta-btn ghost" href="#features">Explore features</a>
+          <div class="meta">
+            <div><strong>Race sync</strong><span>Lights sync with starters gun</span></div>
+            <div><strong>Custom patterns</strong><span>Dial in pacing for any distance or pace</span></div>
+            <div><strong>Rent or own</strong><span>Flexible use for meets and training</span></div>
           </div>
-          <div class="pulse-ring" aria-hidden="true">
-            <div class="pulse-core"></div>
-          </div>
+        </div>
+        <div class="media-card">
+          <img src="image2.png" alt="Track with Strideline pacing lights">
         </div>
       </section>
 
-      <section aria-labelledby="features" id="features">
-        <p class="mini-title"><span></span>Modern pacing system</p>
-        <div class="feature-grid">
+      <section id="features" aria-labelledby="features-title">
+        <p id="features-title" class="section-title"><span></span>Built for modern track programs</p>
+        <div class="grid">
           <article class="card">
-            <h3>Hover-lit visuals</h3>
-            <p>Interactive hover fields reveal neon greens and blues—mirroring the pacing lanes that lead every lap.</p>
+            <h3>Customizable pacing sequences</h3>
+            <p>Program any race distance with any pacing strategy.</p>
           </article>
           <article class="card">
-            <h3>Custom sequences</h3>
-            <p>Design pacing plans for any split, surge, or distance and cue them instantly for training or race day.</p>
+            <h3>Training App</h3>
+            <p>App built for training control with easy to design workouts.</p>
+        
           </article>
           <article class="card">
-            <h3>Sync to the start</h3>
-            <p>Lights launch with the starter’s pistol so every runner hits pace right off the gun.</p>
+            <h3>Flexible access models</h3>
+            <p>Rent a system for your next event or buy a system for your facility.</p>
           </article>
-          <article class="card">
-            <h3>Teams, meets, or rentals</h3>
-            <p>Own a setup for your facility or rent for your next invitational—we’ll configure everything.</p>
-          </article>
+        </div>
+      </section>
+
+      <section class="video-section" aria-labelledby="demo-title">
+        <p id="demo-title" class="section-title"><span></span>See the Stride Line</p>
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/98L6I7q6KCw?si=aZP84Am3J8qbTpdJ" title="StrideLine pacing demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </section>
+
+      <section aria-labelledby="cta-title">
+        <div class="cta-panel">
+          <div>
+            <p class="section-title" id="cta-title"><span></span>Want more?</p>
+            <p>Tell us about your meet, facility, or team  plan and we’ll tailor a Strideline setup to match your goals.</p>
+          </div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;">
+            <a class="cta-btn" href="contact.html">Schedule a call</a>
+          </div>
         </div>
       </section>
     </main>
@@ -212,22 +169,5 @@
       &copy; 2025 Strideline. All rights reserved.
     </footer>
   </div>
-
-  <script>
-    const hero = document.querySelector('.hero');
-    const root = document.documentElement;
-    function updateHover(e) {
-      const rect = hero.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      root.style.setProperty('--x', `${x}%`);
-      root.style.setProperty('--y', `${y}%`);
-    }
-    hero.addEventListener('pointermove', updateHover);
-    hero.addEventListener('pointerleave', () => {
-      root.style.setProperty('--x', '50%');
-      root.style.setProperty('--y', '50%');
-    });
-  </script>
 </body>
 </html>
